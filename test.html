@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="{$lng}">
+<head>
+    <title>Vorabbest&auml;tigung Ihrer Flugbuchung</title>
+    <meta name="viewport" content="width=device-width"/>
+    <link href="{'../nolng/css/foundation.css'|asset_url}" rel="stylesheet">
+    <link href="{'../nolng/css/mq.css'|asset_url}" rel="stylesheet">
+    <meta content="telephone=no" name="format-detection">
+</head>
+<body>
+{* buchungsbestaetigungmail.php?lng=de&token=xtsue-003w2-1imgw-gbaar-wzv1F&out=de/vorabbestaetigungsmail.source.html *}
+{* keine Umlaute !!! ( ü => &uuml; ... ) *}
+{assign var="lng" value="de"}
+{assign var="dfmt" value="%d.%m.%Y"}
+{assign var="pmthcd" value=""}
+{if $header.cur == 'EUR'}
+{assign var="cur" value="&euro;"}
+{else}
+{assign var="cur" value="$"}
+{/if}
+{literal}
+<style type="text/css">
+
+</style>
+{/literal}
+{setfilter toentity}
+
+<!--head-->
+<table class="row header-bar">
+    <tbody>
+    <tr>
+        <th height="50">
+        </th>
+    </tr>
+    </tbody>
+</table>
+
+<table class="row header">
+    <tbody>
+    <tr>
+        <th height="50">
+
+            <table class="body body-background-fix">
+                <tr style="vertical-align: top; padding: 0;" align="left">
+                    <th height="30" align="center" valign="middle" style="color: #323232; font-family: Arial, Helvetica, Calibri, sans-serif; font-weight: normal; line-height: 19px; font-size: 16px; margin: 0; padding: 0;"><table width="900" cellspacing="20" bgcolor="transparent" class="container header text-center" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: center; width: 900px; height: 100px; margin: 0 auto; padding: 16px 0;">
+                        <tr style="vertical-align: top; padding: 0;" align="left">
+                            <th width="268" align="center" valign="middle" style="color: #323232; font-family: Arial, Helvetica, Calibri, sans-serif; font-weight: normal;  margin: 0; padding: 0;"><img class="logo" title="logo" alt="{$header.cfg.adresse.firma_name}" height="80" width="244" {img src="$globalcore/nolng/img/logos/flyusagermany_logo.png"} "></th>
+                            <th width="263" align="center" valign="middle" style="color: #323232; font-family: Arial, Helvetica, Calibri, sans-serif; font-weight: normal; line-height: 19px; font-size: 16px; margin: 0; padding: 0;">&nbsp;</th>
+                            <th width="281" align="left" valign="middle" style="margin-top: 0px; color: #FFFFFF; font-weight: bold; font: arial; font-size: 24px; -webkit-text-stroke: #000000 1px ;">FlyUsaGermany GmbH</div></th>
+                        </tr>
+                    </table>
+                    </th>
+                </tr>
+            </table>
+
+        </th>
+    </tr>
+    </tbody>
+</table>
+<!--head ENDE-->
+
+<!-- Background Container -->
+<table width="100%" height="100%">
+    <tr>
+        <th width='100%' height='100%' bgcolor='#f3f3f3'>
+
+
+            <table class="body">
+                <tr>
+                    <td class="center" align="center" valign="top">
+                        <center>
+
+                            <table class="container text-center">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <table class="row">
+                                            <tbody>
+                                            <tr>
+
+                                                <th class="small-12  large-12 columns first last bodyHolder">
+                                                    <table>
+                                                        <tr>
+                                                            <th>
+                                                                <!--top content-->
+                                                                <table class="callout topText">
+                                                                    <tr>
+                                                                        <th class="callout-inner secondary bigBottom bgHolderPic">
+                                                                            <table class="row collapse">
+                                                                                <tbody>
+                                                                                <tr>
+                                                                                    <th class="small-12 large-12 columns first last">
+                                                                                        <table>
+                                                                                            <tr>
+                                                                                                <th>
+                                                                                                    <h1 class="text-darkblue bold">Reservierungsbest&auml;tigung</h1>
+                                                                                                    <p class="text-grey">
+                                                                                                        Vielen Dank, dass Sie sich f&uuml;r {$header.cfg.adresse.firma_name} entschieden haben.
+
+
+
+                                                                                                        <br /><br />
+                                                                                                        Bitte &uuml;berpr&uuml;fen Sie alle Daten auf Ihre Richtigkeit. Sollten Sie Fehler feststellen, kontaktieren Sie uns bitte umgehend.
+                                                                                                    </p>
+                                                                                                </th>
+                                                                                            </tr>
+                                                                                        </table>
+                                                                                    </th>
+                                                                                </tr>
+
+                                                                                </tbody>
+                                                                            </table>
+
+
+                                                                            {if $header.isTravelchart}
+
+                                                                            <table class="callout pricetableHolder PrintNoPageBreak">
+                                                                                <tr>
+                                                                                    <th class="small-12 large-6 columns first callout-inner table-title">
+                                                                                        <h3 class="text-darkblue">
+                                                                                            Folgende Dokumente stehen Ihnen Gegebenenfalls in
+                                                                                            Ihrem Kunden-Cockpit zum Download bereit
+                                                                                        </h3>
+                                                                                    </th>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <th class="small-12 large-6 columns first callout-inner table-content">
+                                                                                        <ul>
+                                                                                            <li><h5 class="text-darker-grey">Leistungs&uuml;bersicht</h5></li>
+                                                                                            <li><h5 class="text-darker-grey">Reisehinweise: Einreise, -Visa, - und Impfbedingungen</h5></li>
+                                                                                            <li><h5 class="text-darker-grey">AGB von {$header.cfg.adresse.firma_name}</h5></li>
+                                                                                        </ul>
+                                                                                    </th>
+                                                                                </tr>
+                                                                            </table>
+
+                                                                            {else}
+                                                                            <table class="callout pricetableHolder PrintNoPageBreak">
+                                                                                <tr>
+                                                                                    <th class="small-12 large-6 columns first callout-inner table-title">
+                                                                                        <h3 class="text-darkblue bold text-center buchungscode-text">
+                                                                                            Ihr Buchungscode: {$pnr}
+                                                                                        </h3>
+                                                                                    </th>
+                                                                                </tr>
+                                                                            </table>
+
+                                                                            {/if}
+
+                                                                        </th>
+                                                                        <th class="expander"></th>
+                                                                    </tr>
+                                                                </table>
+                                                                <!--top conent ende-->
+
+                                                                {if $pmt != 'off'}
+                                                                <!--Zahlung-->
+                                                                <!--Zahlungsmethode-->
+                                                                <table class="row collapse">
+                                                                    <tr>
+                                                                        <th class="callout-inner secondary">
+
+                                                                            <h1 class="text-darkblue bold">Zahlung</h1>
+                                                                            <p class="text-grey">Gew&auml;hltes Zahlungsmittel:
+                                                                                {if $pmt == 'sup'}
+                                                                                <span class="bold">Sofort&uuml;berweisung</span>
+                                                                                {/if}
+                                                                                {if $pmt =='cce' || $pmt=='ccp'}
+                                                                                <span class="bold">Kreditkarte</span>
+                                                                                {/if}
+                                                                                {if $pmt == 'uwp'}
+                                                                                <span class="bold">&Uuml;berweisung</span>
+                                                                                {/if}
+                                                                                {if $pmt == 'chp'}
+                                                                                <span class="bold">Bar-Zahlung</span>
+                                                                                {/if}
+
+                                                                            </p>
+                                                                        </th>
+                                                                    </tr>
+                                                                </table>
+                                                                <!--Zahlungsmethode Ende-->
+                                                                {/if}
+
+                                                                <!--Zahlung Tabelle-->
+                                                                <!--Zahlung Tabelle GR&uuml;N-->
+                                                                {if ($pmt =='cce' || $pmt=='ccp' || $pmt=='sup') and $pmtstatus == 'ok'}
+                                                                <table class="row collapse">
+                                                                    <tr>
+                                                                        <th class="callout-inner secondary zahlungs-fix">
+                                                                            <table class="row collapse">
+                                                                                <tr>
+                                                                                    <th class="small-12 large-6 columns first callout-inner zahlung-text">
+                                                                                        <h3 class="text-white bold text-center">Betrag:</h3>
+                                                                                    </th>
+                                                                                    <th class="small-12 large-6 columns first callout-inner zahlung-betrag-gruen">
+                                                                                        <h1 class="text-white bold text-center">{$tot|number:$lng} {$cur nofilter}</h1>
+                                                                                        <p class="text-white text-center">Zahlung erhalten</p>
+                                                                                    </th>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </th>
+                                                                    </tr>
+                                                                </table>
+                                                                {/if}
+
+                                                                {if $pmt == 'uwp' || $pmt == 'chp'}
+                                                                <table class="row collapse">
+                                                                    <tr>
+                                                                        <th class="callout-inner secondary zahlungs-fix">
+                                                                            <table class="row collapse">
+                                                                                <tr>
+                                                                                    <th class="small-12 large-6 columns first callout-inner zahlung-text">
+                                                                                        <h3 class="text-white bold text-center">Betrag:</h3>
+                                                                                    </th>
+                                                                                    <th class="small-12 large-6 columns first callout-inner zahlung-betrag-gelb">
+                                                                                        <h1 class="text-darkblue bold text-center">{$tot|number:$lng} {$cur nofilter}</h1>
+                                                                                        <p class="text-darkblue text-center">Zahlung ausstehend </p>
+                                                                                    </th>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </th>
+                                                                    </tr>
+                                                                </table>
+                                                                {/if}
+
+                                                                {if $aPln.pln == 'A'}
+                                                                <!--Zahlung Tabelle GELB-->
+                                                                <table class="row collapse">
+                                                                    <tr>
+                                                                        <th class="callout-inner secondary zahlungs-fix">
+                                                                            <table class="row collapse">
+                                                                                <tr>
+                                                                                    <th class="small-12 large-6 columns first callout-inner zahlung-text">
+                                                                                        <h3 class="text-white bold text-center">Betrag:</h3>
+                                                                                        <p class="text-white text-center">F&auml;llig am {$zahlung.date|date_format:$dfmt}</p>
+                                                                                    </th>
+                                                                                    <th class="small-12 large-6 columns first callout-inner zahlung-betrag-gelb">
+                                                                                        <h1 class="text-darker-grey bold text-center">{$zahlung.rest} {$cur nofilter}</h1>
+                                                                                        <p class="text-darker-grey text-center">Restzahlung</p>
+                                                                                    </th>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </th>
+                                                                    </tr>
+                                                                </table>
+                                                                {/if}
+
+                                                                {if ($pmt =='cce' || $pmt=='ccp' || $pmt=='sup') and $pmtstatus != 'ok'}
+                                                                <!--Zahlung Tabelle ROT-->
+                                                                <table class="row collapse">
+                                                                    <tr>
+                                                                        <th class="callout-inner secondary zahlungs-fix">
+                                                                            <table class="row collapse">
+                                                                                <tr>
+                                                                                    <th class="small-12 large-6 columns first callout-inner zahlung-text">
+                                                                                        <h3 class="text-white bold text-center">Betrag:</h3>
+                                                                                    </th>
+                                                                                    <th class="small-12 large-6 columns first callout-inner zahlung-betrag-rot">
+                                                                                        <h1 class="text-white bold text-center">{$tot|number:$lng} {$cur nofilter}</h1>
+                                                                                        <p class="text-white text-center">Zahlung nicht erhalten</p>
+                                                                                    </th>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </th>
+                                                                    </tr>
+                                                                </table>
+                                                                <!--Zahlung Tabelle Ende-->
+                                                                {/if}
+
+                                                                <!--Zahlungstexte-->
+                                                                <table class="row collapse">
+                                                                    <tr>
+                                                                        <th class="callout-inner secondary">
+
+                                                                            <!--Zahlung nicht ok-->
+                                                                            {if ($pmt =='cce' || $pmt=='ccp' || $pmt=='sup') and $pmtstatus != 'ok'}
+                                                                            <p><span class="bold">Leider ist Ihre Zahlung fehlgeschlagen oder bei {$header.cfg.adresse.firma_name} noch nicht eingegangen.
+																				Bitte versuchen Sie es erneut.</span><br /><br />
+
+                                                                                Erst mit Erhalt Ihres Airline E-Tickets/Reisedokumente und der Rechnung ist Ihre Buchung rechtsverbindlich.<br /><br />
+                                                                                Sollten wir Ihre Zahlung nicht fristgerecht innerhalb 24 Stunden erhalten, beh&auml;lt sich {$header.cfg.adresse.firma_name} vor vom Vertrag
+                                                                                zur&uuml;ckzutreten.
+                                                                            </p>
+                                                                            {/if}
+
+                                                                            {if ($pmt =='cce' || $pmt=='ccp' || $pmt=='sup') and $pmtstatus == 'ok'}
+                                                                            <!--Zahlung ok-->
+                                                                            <p><span class="bold">Ihr Zahlungsvorgang war erfolgreich.</span><br /><br />
+                                                                                Erst mit Erhalt Ihres Airline E-Tickets/Reisedokumente und der Rechnung ist Ihre Buchung rechtsverbindlich.
+                                                                            </p>
+                                                                            {/if}
+
+                                                                            {if $pmt == 'uwp'}
+                                                                            <!--&uuml;berweisung-->
+                                                                            <p><span class="bold">Bitte veranlassen Sie die &Uuml;berweisung per Online-Banking oder bei Ihrer
+																				Bank.</span><br /><br />&Uuml;berweisen Sie sp&auml;testens 24 Stunden nach Erhalt Ihrer
+                                                                                Reservierungsbest&auml;tigung, da {$header.cfg.adresse.firma_name} nur nach Erhalt der Zahlung die Tickets
+                                                                                ausstellen kann.<br /><br />SEPA-&Uuml;berweisungen werden innerhalb von 24 Stunden ausgef&uuml;hrt,
+                                                                                wenn diese vor 15 Uhr (MEZ) get&auml;tigt werden.
+                                                                            </p>
+                                                                            {/if}
+
+                                                                            {if $pmt == chp}
+                                                                            <!--Bar-Zahlung-->
+                                                                            <p>Bezahlung im Reiseb&uuml;ro von {$header.cfg.adresse.firma_name}: Bar (EURO)  oder mit EC-Karte
+                                                                                <br /><br /><span class="bold">Bar-Einzahlung:</span>
+                                                                                Bar-Einzahlungen können auf das Konto {$header.cfg.adresse.firma_name} bei {$header.cfg.adresse.ibanname} vorgenommen werden.
+                                                                                Die Einzahlung können Sie in der jeweiligen Bankfiliale in Ihrer N&auml;he anweisen. Das eingezahlte Bargeld wird t&auml;glich verbucht.
+                                                                            </p>
+                                                                            {/if}
+
+
+                                                                            <!--bankdaten-->
+                                                                            {if $pmt == 'uwp' || $pmt == chp}
+
+                                                                            <table class="row collapse bankdatenRow">
+                                                                                <tr>
+                                                                                    <th class="callout-inner secondary">
+                                                                                        <table class="row collapse">
+                                                                                            <tr>
+                                                                                                <th class="small-12 large-6 columns first callout-inner">
+                                                                                                    <h1 class="text-darkblue bold">{$header.cfg.adresse.ibanname}</h1>
+                                                                                                    <p>
+                                                                                                        <span class="bold">IBAN:</span>
+                                                                                                        {$header.cfg.adresse.iban}
+                                                                                                        <br>
+                                                                                                        <span class="bold">BIC:</span>
+                                                                                                        &nbsp;&nbsp;&nbsp;{$header.cfg.adresse.bic}
+                                                                                                    </p>
+                                                                                                </th>
+                                                                                                {if $header.cfg.adresse.iban2}
+                                                                                                <th class="small-12 large-6 columns first callout-inner">
+                                                                                                    <h1 class="text-darkblue bold">{$header.cfg.adresse.ibanname2}</h1>
+                                                                                                    <p>
+                                                                                                        <span class="bold">IBAN:</span>
+                                                                                                        {$header.cfg.adresse.iban2}
+                                                                                                        <br>
+                                                                                                        <span class="bold">BIC:</span>
+                                                                                                        &nbsp;&nbsp;&nbsp;{$header.cfg.adresse.bic2}
+                                                                                                    </p>
+                                                                                                </th>
+                                                                                                {/if}
+                                                                                            </tr>
+                                                                                        </table>
+                                                                                    </th>
+                                                                                </tr>
+                                                                            </table>
+
+                                                                            {/if}
+
+                                                                            {if $aPln.pln == 'A' and $pmt=='sup'}
+                                                                            <p><span class="bold">Vielen Dank, wir haben Ihre Anzahlung per SOFORT &Uuml;berweisung
+																				erhalten.</span><br /><br />Ihre Restzahlung ist bis 30 Tage vor Abreise f&auml;llig.
+                                                                                Bitte bedenken Sie, dass die Restzahlung eigenst&auml;ndig get&auml;tigt werden muss.<br /><br /> Unsere
+                                                                                Zahlungserinnerung wird Ihnen helfen den Termin nicht zu verpassen. Sollten wir Ihre Restzahlung
+                                                                                nicht fristgerecht erhalten, beh&auml;lt sich {$header.cfg.adresse.firma_name} vor vom Vertrag zur&uuml;ckzutreten.
+                                                                            </p>
+                                                                            {/if}
+
+                                                                            {if $aPln.pln == 'A' and ($pmt =='cce' || $pmt=='ccp')}
+                                                                            <p><span class="bold">Vielen Dank, wir haben Ihre Anzahlung per Kreditkarte erhalten.</span><br /><br />Ihre Restzahlung ist
+                                                                                bis 30 Tage vor Abreise f&auml;llig. Bitte bedenken Sie, dass die Restzahlung fristgerecht von Ihrer Kreditkarte automatisch
+                                                                                eingezogen wird. Sollte Ihre Kreditkarte nicht belastbar sein, behalten wir uns vor vom Vertrag zur&uuml;ckzutreten.
+                                                                            </p>
+                                                                            {/if}
+
+                                                                        </th>
+                                                                    </tr>
+                                                                </table>
+                                                                <!--Zahlungstexte ENDE-->
+                                                                <!--top text ENDE-->
+                                                            </th>
+                                                        </tr>
+                                                    </table>
+                                                </th>
+
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </center>
+                    </td>
+                </tr>
+            </table>
+
+            <!--Background Container Ende-->
+</table>
+</tr>
+</th>
+
+<!--Footer-->
+<!--Footer Feedback/Contact-->
+<table class="body footer-feedback">
+    <tr>
+        <td class="center" align="center" valign="top">
+            <center>
+                <table class="container header text-center">
+                    <tr>
+                        <th>
+
+                            <table class="callout footer PrintNoPageBreak PrintNoPaddingBottom">
+                                <tr>
+                                    <th class="callout-inner footer-feedback PrintNoPaddingBottom">
+                                        <table class="row collapse">
+                                            <tbody>
+                                            <tr>
+                                                <th class="large-6 small-12 first columns PrintNoPaddingBottom">
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <h4 class="text-darkblue bold">Ob Fragen oder Feedback –
+                                                                    Wir sind f&uuml;r Sie da!</h4>
+                                                                <h6 class="text-darkblue bold">Wir freuen uns von Ihnen zu hören.<br /><span class="text-lightblue">Ihr Team von {$header.cfg.adresse.firma_name}</span></h6>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </th>
+                                                <th class="large-6 small-12 last columns PrintNoPaddingBottom">
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <h6 class="lastFooterCol">Telefon: {$header.cfg.adresse.tel}</h6>
+                                                                <h6 class="lastFooterCol">E-Mail: {$header.cfg.adresse.email}</h6>
+                                                                <h6 class="lastFooterCol">Head Office: Charlotte, NC</h6>
+                                                                <h6 class="lastFooterCol">Branch Office: Tarpon Springs, FL</h6>
+                                                                <!-- h6 class="lastFooterCol">Fax: 0000 00 00 000</h6 -->
+                                                                <!-- h6 class="lastFooterCol">Facebook: "Ihr Facebook"</h6 -->
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </th>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </th>
+                                    <th class="expander"></th>
+                                </tr>
+                            </table>
+
+                        </th>
+                    </tr>
+                </table>
+            </center>
+        </td>
+    </tr>
+</table>
+<!--Footer Feedback/Contact Ende-->
+
+<!--Footer Adresse-->
+<table class="body footer-adresse">
+    <tr>
+        <td class="center" align="center" valign="top">
+            <center>
+                <table class="container header text-center">
+                    <tr>
+                        <th>
+
+                            <table class="callout footer PrintNoPageBreak PrintNoPaddingBottom">
+                                <tr>
+                                    <th class="callout-inner secondary PrintNoPaddingBottom">
+                                        <table class="row collapse">
+                                            <tbody>
+                                            <tr>
+                                                <th class="large-6 small-12 first columns PrintNoPaddingBottom">
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="small-text-center bold footer-adresse-text">
+                                                                    {$header.cfg.adresse.firma_name}
+                                                                    <br/>
+                                                                    <br />
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </th>
+                                                <th class="large-6 small-12 last columns PrintNoPaddingBottom">
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="small-text-center lastFooterCol footer-adresse-text">
+                                                                    "Ihre Straße"
+                                                                    <br/>
+                                                                    "Ihre Stadt"
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </th>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </th>
+                                    <th class="expander"></th>
+                                </tr>
+                            </table>
+
+                        </th>
+                    </tr>
+                </table>
+            </center>
+        </td>
+    </tr>
+</table>
+<!--Footer Adresse Ende-->
+
+<table class="row header-bar">
+    <tbody>
+    <tr>
+        <th height="50">
+        </th>
+    </tr>
+    </tbody>
+</table>
+
+<!--Footer Ende-->
+{/setfilter}
+{if $get.print == "yes"}
+<script>
+    window.print();
+</script>
+{/if}
+</body>
+</html>
